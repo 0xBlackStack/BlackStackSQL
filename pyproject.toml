@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blackstacksql"
+version = "1.0.0"
+authors = [
+    { name = "Reflex Coder / BlackStack Unit", email = "reflex@blackstack.io" }
+]
+description = "Advanced Modular SQL Injection Toolkit"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests",
+    "colorama"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+skip-string-normalization = false
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | build
+  | dist
+  | sessions
+  | venv
+)/
+'''

@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackStackSQL Documentation</title>
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., theme toggle) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom CSS for themes and specific styles */
+        :root {
+            /* Dark Theme Variables (Default) */
+            --bg-primary: #1e293b;
+            /* Darker slate */
+            --bg-secondary: #334155;
+            /* Even darker slate for cards/sections */
+            --bg-tertiary: #0f172a;
+            /* Very dark for header/footer/code background */
+            --text-primary: #e2e8f0;
+            /* Light gray */
+            --text-secondary: #94a3b8;
+            /* Muted gray */
+            --accent-color: #f97316;
+            /* Tailwind orange-500 */
+            --accent-light: #fb923c;
+            /* Tailwind orange-400 */
+            --border-color: #475569;
+            /* Slate-600 */
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            --code-text-color: #a7f3d0;
+            /* Emerald-200 */
+        }
+
+        [data-theme="light"] {
+            /* Light Theme Variables */
+            --bg-primary: #f8fafc;
+            /* Lightest gray */
+            --bg-secondary: #ffffff;
+            /* White for cards/sections */
+            --bg-tertiary: #e2e8f0;
+            /* Light blue-gray for header/footer/code background */
+            --text-primary: #1e293b;
+            /* Dark slate */
+            --text-secondary: #475569;
+            /* Muted slate */
+            --accent-color: #ea580c;
+            /* Tailwind orange-600 */
+            --accent-light: #f97316;
+            /* Tailwind orange-500 */
+            --border-color: #cbd5e1;
+            /* Slate-300 */
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --code-text-color: #10b981;
+            /* Emerald-600 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
+        }
+
+        /* General Link Styling */
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header Specifics */
+        header {
+            background-color: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px var(--shadow-color);
+        }
+
+        header #branding h1 {
+            color: var(--accent-color);
+        }
+
+        header nav a {
+            color: var(--text-primary);
+        }
+
+        header nav a:hover {
+            color: var(--accent-color);
+            background-color: var(--bg-secondary);
+        }
+
+        /* Showcase Section */
+        #showcase {
+            background-image: url('https://placehold.co/1920x800/1e293b/f97316?text=BlackStackSQL+Documentation');
+        }
+
+        .showcase-overlay {
+            background: linear-gradient(to top, var(--bg-primary) 0%, rgba(30, 41, 59, 0.4) 100%);
+        }
+
+        #showcase h1 {
+            text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+        }
+
+        /* Main Content Sections */
+        main {
+            background-color: var(--bg-primary);
+        }
+
+        h2,
+        h3 {
+            color: var(--accent-color);
+        }
+
+        section h2 {
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* Feature Cards */
+        #main ul li {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 4px 6px -1px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            /* Removed transform hover effect for strictness */
+        }
+
+        #main ul li h3 {
+            color: var(--accent-light);
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px var(--shadow-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        pre code {
+            color: var(--code-text-color);
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Table Styling */
+        table {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px var(--shadow-color);
+        }
+
+        table thead {
+            background-color: var(--bg-tertiary);
+        }
+
+        table th {
+            color: var(--accent-light);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        table tbody tr:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        table td {
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-tertiary);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* No animations for sections/elements */
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Header Section -->
+    <header class="py-4 shadow-lg sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <!-- Branding/Logo -->
+            <div id="branding" class="mb-4 md:mb-0">
+                <h1 class="text-3xl font-extrabold">BlackStackSQL</h1>
+            </div>
+            <!-- Navigation Menu -->
+            <nav>
+                <ul class="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-6 text-sm md:text-base">
+                    <li><a href="#features" class="px-3 py-2 rounded-md transition-colors duration-300">Features</a>
+                    </li>
+                    <li><a href="#installation"
+                            class="px-3 py-2 rounded-md transition-colors duration-300">Installation</a></li>
+                    <li><a href="#usage" class="px-3 py-2 rounded-md transition-colors duration-300">Usage</a></li>
+                    <li><a href="#cli" class="px-3 py-2 rounded-md transition-colors duration-300">CLI Flags</a></li>
+                    <li><a href="#command-reference"
+                            class="px-3 py-2 rounded-md transition-colors duration-300">Commands</a></li>
+                    <li><a href="#config-guide"
+                            class="px-3 py-2 rounded-md transition-colors duration-300">Configuration</a></li>
+                    <li><a href="#contributing"
+                            class="px-3 py-2 rounded-md transition-colors duration-300">Contributing</a></li>
+                    <li><a href="#license" class="px-3 py-2 rounded-md transition-colors duration-300">License</a></li>
+                    <li>
+                        <!-- Theme Toggle Button -->
+                        <button id="themeToggle"
+                            class="px-3 py-2 rounded-md transition-colors duration-300 focus:outline-none">
+                            <i class="fas fa-sun text-lg" id="themeIcon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Showcase / Hero Section -->
+    <section id="showcase"
+        class="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
+        <!-- Background Image with Placeholder -->
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('https://placehold.co/1920x800/1e293b/f97316?text=BlackStackSQL+Documentation');">
+        </div>
+        <!-- Overlay for better text readability -->
+        <div class="showcase-overlay absolute inset-0"></div>
+        <div class="container mx-auto px-4 relative z-10 py-16">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4">BlackStackSQL</h1>
+            <p class="text-lg md:text-2xl">Advanced Python-based SQL Injection Automation Tool</p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <main id="main" class="py-16">
+        <div class="container mx-auto px-4 max-w-4xl">
+
+            <!-- Features Section -->
+            <section class="mb-12">
+                <h2 id="features" class="text-4xl font-bold mb-8 pb-2">Features</h2>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <li class="p-6 rounded-lg shadow-md transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-2">Injection Detection</h3>
+                        <p class="text-base text-secondary">Comprehensive detection for GET/POST/Cookie based SQL
+                            injections.</p>
+                    </li>
+                    <li class="p-6 rounded-lg shadow-md transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-2">Diverse Techniques</h3>
+                        <p class="text-base text-secondary">Supports Union-based, error-based, boolean-blind, and
+                            time-blind injection methods.</p>
+                    </li>
+                    <li class="p-6 rounded-lg shadow-md transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-2">Auto DBMS Detection</h3>
+                        <p class="text-base text-secondary">Automatically identifies the Database Management System
+                            (MySQL, MSSQL, PostgreSQL, etc.).</p>
+                    </li>
+                    <li class="p-6 rounded-lg shadow-md transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-2">Advanced Evasion</h3>
+                        <p class="text-base text-secondary">Includes WAF evasion, form crawling, and intelligent payload
+                            obfuscation.</p>
+                    </li>
+                    <li class="p-6 rounded-lg shadow-md transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-2">Performance & Persistence</h3>
+                        <p class="text-base text-secondary">Multi-threaded scanning for speed and session-based scanning
+                            for continuity.</p>
+                    </li>
+                    <li class="p-6 rounded-lg shadow-md transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-2">Flexible Export</h3>
+                        <p class="text-base text-secondary">Export scan results in various formats: .txt, .json, or
+                            .csv.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Installation Section -->
+            <section class="mb-12">
+                <h2 id="installation" class="text-4xl font-bold mb-6 pb-2">Installation</h2>
+                <p class="text-lg mb-4 text-secondary">Clone the repository and install using `setup.py`:</p>
+                <div class="relative rounded-lg shadow-inner overflow-hidden">
+                    <pre class="p-6 font-mono text-sm md:text-base"><code class="language-bash">git clone https://github.com/0xBlackStack/blackstacksql.git
+cd blackstacksql
+python setup.py install</code></pre>
+                    <button
+                        class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                        onclick="copyCode(this)">Copy</button>
+                </div>
+            </section>
+
+            <!-- Usage Section -->
+            <section class="mb-12">
+                <h2 id="usage" class="text-4xl font-bold mb-6 pb-2">Usage</h2>
+                <p class="text-lg mb-4 text-secondary">Run the tool with various CLI options:</p>
+                <div class="relative rounded-lg shadow-inner overflow-hidden mb-4">
+                    <pre
+                        class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --scan</code></pre>
+                    <button
+                        class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                        onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="relative rounded-lg shadow-inner overflow-hidden mb-4">
+                    <pre
+                        class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://site.com/page.php --dump --columns users,password</code></pre>
+                    <button
+                        class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                        onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="relative rounded-lg shadow-inner overflow-hidden">
+                    <pre
+                        class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --form --waf-bypass --save-json</code></pre>
+                    <button
+                        class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                        onclick="copyCode(this)">Copy</button>
+                </div>
+            </section>
+
+            <!-- CLI Flags Section -->
+            <section class="mb-12">
+                <h2 id="cli" class="text-4xl font-bold mb-6 pb-2">CLI Flags</h2>
+                <div class="rounded-lg shadow-md overflow-hidden">
+                    <table class="min-w-full divide-y divide-border-color">
+                        <thead class="bg-tertiary">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-accent-light">
+                                    Flag</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-accent-light">
+                                    Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-border-color">
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--url</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Target URL to scan</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--scan</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Detection-only mode</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--dump</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Dump DB structure and data</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--columns</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Dump specific columns</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--form</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Scan HTML forms</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--proxy</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Use proxy from file or Tor</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--cookie</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Send cookies with request</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--header</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Add custom headers</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--waf-bypass
+                                </td>
+                                <td class="px-6 py-4 text-sm text-secondary">Enable payload evasions</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--resume</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Resume previous session</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--save-json
+                                </td>
+                                <td class="px-6 py-4 text-sm text-secondary">Save results in JSON</td>
+                            </tr>
+                            <tr class="transition-colors duration-200 hover:bg-secondary">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">--html-log</td>
+                                <td class="px-6 py-4 text-sm text-secondary">Save report as HTML</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- BlackStackSQL Command Reference -->
+            <section class="mb-12">
+                <h2 id="command-reference" class="text-4xl font-bold mb-6 pb-2">BlackStackSQL Command Reference</h2>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Basic Commands</h3>
+                <div class="space-y-6 mb-8">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Scan a URL for SQL Injection</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --scan</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Dump Database Structure and Data</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --dump</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Dump Specific Columns</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --dump --columns users,email,password</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Enable Form Crawling</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com --form</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Enable WAF Bypass</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --waf-bypass</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Use a Proxy</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --proxy http://127.0.0.1:8080</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Send Custom Cookies</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --cookie "sessionid=abc123"</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Add Custom Headers</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --header "X-Custom-Header: value"</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Resume a Previous Session</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --resume /path/to/session</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Save Results as JSON</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --save-json</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Save Log as HTML</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --html-log</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Advanced Usage</h3>
+                <div class="space-y-6 mb-8">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Combine Multiple Options</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --scan --dump --columns users,email,password --waf-bypass --proxy http://127.0.0.1:8080</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Use with POST Data</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com/login.php --data "username=admin&password=1" --scan</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Enable Aggressive Scanning</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --aggressive</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Specify Number of Threads</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --threads 10</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Examples</h3>
+                <div class="space-y-6">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Basic Scan</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --scan</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Full Scan with Dump and WAF Bypass</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --scan --dump --waf-bypass</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Crawl Forms and Dump Specific Columns</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com --form --dump --columns users,email,password</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Use Proxy and Save Results</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --proxy http://127.0.0.1:8080 --save-json</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Resume a Session</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --resume /path/to/session</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BlackStackSQL Configuration Guide -->
+            <section class="mb-12">
+                <h2 id="config-guide" class="text-4xl font-bold mb-6 pb-2">BlackStackSQL Configuration Guide</h2>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Overview</h3>
+                <p class="text-lg mb-6 text-secondary">BlackStackSQL is a highly configurable SQL injection automation
+                    tool. This guide covers all configuration options, from basic setup to advanced customization.</p>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Basic Configuration</h3>
+                <div class="space-y-6 mb-8">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Installation</h4>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-bash">git clone https://github.com/0xBlackStack/blackstacksql.git
+cd blackstacksql
+python setup.py install</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Running the Tool</h4>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --scan</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Configuration Files</h3>
+                <div class="space-y-6 mb-8">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            .gitignore</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Excludes unnecessary files from version control:
+                        </p>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-plaintext"># Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+*.so
+*.log
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# BlackStackSQL Runtime
+sessions/
+*.json
+*.csv
+*.txt
+*.dump
+*.output
+*.log
+
+# Build/Dist Files
+*.exe
+*.zip
+dist/
+build/
+*.spec
+
+# Git itself
+.gitignore</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            .gitattributes</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Enforces line-ending consistency and file
+                            classification:</p>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-plaintext"># top-most EditorConfig file
+root = true
+
+# Apply to all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Python files
+[*.py]
+indent_style = space
+indent_size = 4
+
+# JSON and config files
+[*.json]
+indent_style = space
+indent_size = 2
+
+# Markdown/README
+[*.md]
+trim_trailing_whitespace = false
+
+# Shell scripts
+[*.sh]
+indent_style = space
+indent_size = 2</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            .editorconfig</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Ensures consistent code style across editors:</p>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-plaintext"># top-most EditorConfig file
+root = true
+
+# Apply to all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Python files
+[*.py]
+indent_style = space
+indent_size = 4
+
+# JSON and config files
+[*.json]
+indent_style = space
+indent_size = 2
+
+# Markdown/README
+[*.md]
+trim_trailing_whitespace = false
+
+# Shell scripts
+[*.sh]
+indent_style = space
+indent_size = 2</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            .pre-commit-config.yaml</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Automated code quality checks:</p>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-yaml">repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+        language_version: python3.8
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8-bugbear]</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            .flake8</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Linting rules:</p>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-ini">[flake8]
+max-line-length = 100
+exclude = .git,__pycache__,venv,sessions,dist,build
+ignore = E203, E266, E501, W503
+max-complexity = 10</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            pyproject.toml</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Project metadata and dependencies:</p>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-toml">[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blackstacksql"
+version = "1.0.0"
+authors = [
+    { name = "Reflex Coder / BlackStack Unit", email = "reflex@blackstack.io" }
+]
+description = "Advanced Modular SQL Injection Toolkit"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests",
+    "colorama"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+skip-string-normalization = false
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | build
+  | dist
+  | sessions
+  | venv
+)/
+'''</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Advanced Configuration</h3>
+                <div class="space-y-6 mb-8">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Custom Payloads</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Add your own SQL injection payloads in the
+                            <code>payloads/</code> directory. Each file should contain one payload per line.
+                        </p>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Proxy Configuration</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Configure proxies in a text file and pass the file
+                            path to the <code>--proxy</code> option:</p>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --proxy /path/to/proxies.txt</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Custom Headers and Cookies</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Pass custom headers and cookies using the
+                            <code>--header</code> and <code>--cookie</code> options:
+                        </p>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --header "X-Custom-Header: value" --cookie "sessionid=abc123"</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            WAF Bypass</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Enable WAF bypass techniques using the
+                            <code>--waf-bypass</code> option:
+                        </p>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --waf-bypass</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Resuming Sessions</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Resume a previous scan using the
+                            <code>--resume</code> option:
+                        </p>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --resume /path/to/session</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Saving Results</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Save scan results in JSON or HTML format:</p>
+                        <pre class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --save-json
+python3 main.py --url http://target.com?id=1 --html-log</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color">Troubleshooting</h3>
+                <div class="space-y-6 mb-8">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Common Issues</h4>
+                        <p class="text-base text-secondary p-4 pt-0">
+                            - <strong>Proxy Errors</strong>: Ensure the proxy file contains valid proxies and that the
+                            proxies are reachable.<br>
+                            - <strong>WAF Detection</strong>: If the tool is blocked by a WAF, try enabling WAF bypass
+                            or using a proxy.<br>
+                            - <strong>Timeouts</strong>: Increase the timeout using the <code>--timeout</code> option
+                            (if implemented).
+                        </p>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Logging</h4>
+                        <p class="text-base text-secondary p-4 pt-0">All actions are logged to the console and can be
+                            saved to a file using the <code>--output</code> option:</p>
+                        <pre
+                            class="p-6 font-mono text-sm md:text-base"><code class="language-bash">python3 main.py --url http://target.com?id=1 --output /path/to/log.txt</code></pre>
+                        <button
+                            class="copy-btn absolute top-3 right-3 px-3 py-1 rounded-md text-xs transition-colors duration-200"
+                            onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contributing Section -->
+            <section class="mb-12">
+                <h2 id="contributing" class="text-4xl font-bold mb-6 pb-2">Contributing</h2>
+                <p class="text-lg text-secondary">Contributions are welcome. Please follow the existing code style and
+                    add tests for new features.</p>
+                <div class="space-y-6 mt-6">
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Adding New Modules</h4>
+                        <p class="text-base text-secondary p-4 pt-0">
+                            1. Create a new file in the <code>modules/</code> directory.<br>
+                            2. Implement the required functionality.<br>
+                            3. Add the module to the main.py file.<br>
+                            4. Update the documentation.
+                        </p>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Adding New Payloads</h4>
+                        <p class="text-base text-secondary p-4 pt-0">
+                            1. Create a new file in the <code>payloads/</code> directory.<br>
+                            2. Add your payloads, one per line.<br>
+                            3. Update the documentation to reflect the new payloads.
+                        </p>
+                    </div>
+                    <div class="relative rounded-lg shadow-inner overflow-hidden">
+                        <h4
+                            class="text-lg font-medium text-primary p-4 bg-tertiary border-b border-border-color rounded-t-lg">
+                            Reporting Issues</h4>
+                        <p class="text-base text-secondary p-4 pt-0">Please report any issues or feature requests on the
+                            GitHub repository.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- License Section -->
+            <section>
+                <h2 id="license" class="text-4xl font-bold mb-6 pb-2">License</h2>
+                <p class="text-lg text-secondary">MIT License &copy; 2025 - BlackStackSQL Team</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-8 mt-16 text-sm border-t">
+        <p>BlackStackSQL - Advanced SQL Injection Automation Tool, Copyright &copy; 2025</p>
+    </footer>
+
+    <script>
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement; // Get the <html> element
+
+        // Function to set theme
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateThemeIcon(theme);
+        }
+
+        // Function to update icon based on theme
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // Initialize theme from localStorage or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        // Event listener for theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // --- Smooth Scrolling for Anchor Links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // Calculate offset for sticky header
+                    const headerOffset = document.querySelector('header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerOffset - 20; // 20px extra padding
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- Copy to Clipboard Functionality ---
+        function copyCode(button) {
+            const pre = button.previousElementSibling;
+            const code = pre.querySelector('code').innerText;
+
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                // Fallback for browsers that don't support execCommand
+                const messageBox = document.createElement('div');
+                messageBox.textContent = 'Failed to copy code. Please copy it manually.';
+                messageBox.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: #dc2626; /* Red */
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                    z-index: 1000;
+                    opacity: 0;
+                    transition: opacity 0.5s ease-in-out;
+                `;
+                document.body.appendChild(messageBox);
+                setTimeout(() => {
+                    messageBox.style.opacity = 1;
+                }, 10);
+                setTimeout(() => {
+                    messageBox.style.opacity = 0;
+                    messageBox.addEventListener('transitionend', () => messageBox.remove());
+                }, 3000);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // --- Removed all animation-related JavaScript ---
+        // No Intersection Observer for scroll-triggered animations
+        // No Snow Effect Canvas logic
+        // No Abstract Background Circles Canvas logic
+    </script>
+</body>
+
+</html>
