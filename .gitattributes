@@ -1,28 +1,29 @@
-# top-most EditorConfig file
-root = true
-
-# Apply to all files
-[*]
-charset = utf-8
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
+# Handle line endings
+* text=auto
 
 # Python files
-[*.py]
-indent_style = space
-indent_size = 4
+*.py text diff=python
 
-# JSON and config files
-[*.json]
-indent_style = space
-indent_size = 2
+# JSON
+*.json text
 
-# Markdown/README
-[*.md]
-trim_trailing_whitespace = false
+# Markdown
+*.md text
 
 # Shell scripts
-[*.sh]
-indent_style = space
-indent_size = 2
+*.sh text eol=lf
+
+# HTML
+*.html text
+
+# Exclude binary from diff
+*.exe binary
+*.zip binary
+*.tar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+
+# UTF-8 encoding by default
+* charset=utf-8
