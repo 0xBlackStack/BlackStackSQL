@@ -1,0 +1,5 @@
+' UNION SELECT table_name,column_name,data_type FROM all_tab_columns --
+' UNION SELECT table_name,column_name,data_type FROM all_tab_columns WHERE table_name='USERS' --
+' UNION SELECT table_name,column_name,data_type FROM all_tab_columns WHERE table_name='PRODUCTS' --
+' UNION SELECT table_name,column_name,data_type FROM all_tab_columns WHERE table_name='ORDERS' --
+' UNION SELECT table_name,column_name,data_type FROM all_tab_columns WHERE table_name='CUSTOMERS' --

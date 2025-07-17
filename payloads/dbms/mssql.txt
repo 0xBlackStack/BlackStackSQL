@@ -1,0 +1,5 @@
+' UNION SELECT name,type,type_desc FROM sys.objects --
+' UNION SELECT name,type,type_desc FROM sys.objects WHERE type='U' --
+' UNION SELECT name,type,type_desc FROM sys.objects WHERE type='V' --
+' UNION SELECT name,type,type_desc FROM sys.objects WHERE type='P' --
+' UNION SELECT name,type,type_desc FROM sys.objects WHERE type='S' --

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+*.so
+*.log
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# OS and IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Build/Dist Files
+*.exe
+*.zip
+dist/
+build/
+*.spec
+
+# Git itself
+.gitignore

