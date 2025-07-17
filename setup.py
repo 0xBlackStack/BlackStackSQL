@@ -5,7 +5,7 @@ setup(
     version="1.0.0",
     author="Reflex Coder / BlackStack Unit",
     description="Advanced Modular SQL Injection Toolkit",
-    long_description=open("BlackStackSQL/README.md", encoding="utf-8").read(),
+    long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/0xBlackStack/BlackStackSQL",
     packages=find_packages(),
