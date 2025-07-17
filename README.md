@@ -36,7 +36,7 @@ blackstacksql/
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/yourname/blackstacksql.git
+git clone https://github.com/0xBlackStack/blackstacksql.git
 cd blackstacksql
 python setup.py install
 ```
